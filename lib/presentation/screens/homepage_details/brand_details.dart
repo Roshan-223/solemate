@@ -25,11 +25,8 @@ class BrandScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            // "All" tab shows all products
             _buildPlaceholderGrid('All'),
-            // "Sports" tab shows only sports products
             _buildPlaceholderGrid('Sports'),
-            // "Casuals" tab shows only casuals products
             _buildPlaceholderGrid('Casuals'),
           ],
         ),

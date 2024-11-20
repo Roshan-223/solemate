@@ -20,7 +20,7 @@ class BrandContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // Trigger the onTap function when tapped
+      onTap: onTap, 
       child: Container(
         width: 60,
         height: 80,

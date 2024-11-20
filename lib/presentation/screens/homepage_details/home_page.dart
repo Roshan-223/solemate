@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solemate/business_logic/brand_category/brand_category_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:solemate/business_logic/brand_category/brand_category_state.dart
 import 'package:solemate/presentation/screens/homepage_details/widget/carousel_slider1.dart';
 import 'package:solemate/presentation/widget/custom_textfield.dart';
 import 'package:solemate/presentation/widget/homepage_brands_widget/homepage_containers.dart';
-
 import 'brand_details.dart';
 import '../utils/colors.dart';
 import '../utils/constants.dart';

@@ -1,24 +1,21 @@
-
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:solemate/presentation/screens/login/login_screen.dart';
 import 'package:solemate/presentation/screens/account_settings_screen/about.dart';
 import 'package:solemate/presentation/screens/account_settings_screen/my_address.dart';
 import 'package:solemate/presentation/screens/account_settings_screen/my_orders.dart';
 import 'package:solemate/presentation/screens/account_settings_screen/privacy_policy.dart';
-import 'package:solemate/presentation/screens/login/login_screen.dart';
 import 'package:solemate/presentation/screens/utils/colors.dart';
 import 'package:solemate/presentation/screens/utils/constants.dart';
+import 'package:solemate/service/auth_service.dart';
 
 class ProfileScreen extends StatelessWidget {
-   const ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   final List<Map<String, dynamic>> options = const [
     {'icon': Icons.location_on, 'title': 'My Address', 'page': MyAddress()},
     {'icon': Icons.shopping_bag, 'title': 'My Orders', 'page': MyOrders()},
-    {
-      'icon': Icons.privacy_tip,
-      'title': 'Privacy and Policy',
-      'page': PrivacyPolicy()
-    },
+    {'icon': Icons.privacy_tip, 'title': 'Privacy and Policy', 'page': PrivacyPolicy()},
     {'icon': Icons.info, 'title': 'About', 'page': AboutScreen()},
     {'icon': Icons.logout, 'title': 'Log Out', 'isLogout': true},
   ];
@@ -59,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                       radius: 40,
                       backgroundColor: kwhite,
                       backgroundImage: AssetImage(
-                          'assests/images/bad786dfe4f227555be6fa2484b0b9a3.jpg'),
+                          'assets/images/bad786dfe4f227555be6fa2484b0b9a3.jpg'), // Fixed asset path
                     ),
                     kheight16,
                     Column(
@@ -137,7 +134,16 @@ class ProfileScreen extends StatelessWidget {
               child: const Text('No'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                // Sign out using AuthService and clear SharedPreferences
+                final authService = AuthService();
+                await authService.signOut();
+
+                // Clear the login status from SharedPreferences
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.remove('isLoggedIn');
+
+                // Navigate back to LoginScreen
                 Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
